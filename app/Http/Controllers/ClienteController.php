@@ -1,6 +1,7 @@
 <?php
 /*todas las vistas estan en resources/views/clientes y la conexion esta configurada tanto en
-app/config/database.php como en el archibo .env */
+app/config/database.php como en el archibo .env 
+las rutas estan configuradas en el archivo web del fichero routes</div> */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class ClienteController extends Controller
 {
     public function CrearCliente(Request $request)
     {
-
+        //validacion para que ningun campo este vacion
         $request->validate([
             'national_id' => 'required',
             'first_name' => 'required',
@@ -61,7 +62,7 @@ class ClienteController extends Controller
             $mensaje="sus datos se han cargado con exito";
             return view('cliente/mensaje',compact('mensaje'));
         }else{
-            $mensaje="sus datos se han podido cargar por favor intente mas tarde";
+            $mensaje="sus datos no se han podido cargar por favor intente mas tarde";
             return view('cliente/mensaje',compact('mensaje'));
         }
     }

@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 //todos los metodos estan realizados en el controlador ClienteControllers en la carpeta app/http/controllers
+//estas son rutas de prueba eliminar cuando se pase a produccion
 Route::post('cliente/datos',[ClienteController::class,'BuscarDatos'])->name('cliente.BuscarDatos');
 Route::get('cliente/buscar',[ClienteController::class,'Buscar'])->name('cliente.buscar');
 

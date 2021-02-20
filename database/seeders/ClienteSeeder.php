@@ -11,6 +11,8 @@ class ClienteSeeder extends Seeder
      *
      * @return void
      */
+
+     //datos de prueba insertar con php artisan db:seed
     public function run()
     {
         $cliente= new Cliente();

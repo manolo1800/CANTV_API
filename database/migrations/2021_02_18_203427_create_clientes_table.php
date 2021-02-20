@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateClientesTable extends Migration
 {
-    
+    //tabla de prueba cargar con php artisan migrate
     public function up()
     {
         Schema::create('clientes', function (Blueprint $table) {

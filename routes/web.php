@@ -18,8 +18,6 @@ Route::get('/', function () {
 });
 //todos los metodos estan realizados en el controlador ClienteControllers en la carpeta app/http/controllers
 Route::post('cliente/datos',[ClienteController::class,'BuscarDatos'])->name('cliente.BuscarDatos');
-Route::get('cliente/formulario',[ClienteController::class,'Formulario'])->name('cliente.Nuevo');
-Route::post('cliente/crear',[ClienteController::class,'CrearCliente'])->name('cliente.crear');
 Route::get('cliente/buscar',[ClienteController::class,'Buscar'])->name('cliente.buscar');
 
 ?>  

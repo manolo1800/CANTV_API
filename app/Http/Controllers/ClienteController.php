@@ -10,81 +10,31 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    public function CrearCliente(Request $request)
-    {
-        //validacion para que ningun campo este vacion
-        $request->validate([
-            'national_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'mari_id' => 'required',
-            'nac_id' => 'required',
-            'sex_id' => 'required',
-            'prof_id' => 'required',
-            'ctv_birthdate' => 'required',
-            'salutation_cd' => 'required',
-            'phone' => 'required',
-            'email_addr' => 'required',
-            'ctv_lgr_nacimiento' => 'required',
-            'postal' => 'required',
-            'nied_id' => 'required',
-            'cata_id' => 'required',
-            'parr_id' => 'required',
-            'address1' => 'required',
-            'address2' => 'required',
-            'address3' =>'required'
-        ]);
-
-        $cliente= new Cliente();
-        $cliente->national_id = $request->national_id;
-        $cliente->first_name= $request->first_name;
-        $cliente->last_name= $request->last_name;
-        $cliente->mari_id= $request->mari_id;
-        $cliente->nac_id= $request->nac_id;
-        $cliente->sex_id= $request->sex_id;
-        $cliente->prof_id= $request->prof_id;
-        $cliente->ctv_birthdate= $request->ctv_birthdate;
-        $cliente->salutation_cd= $request->salutation_cd;
-        $cliente->phone= $request->phone;
-        $cliente->email_addr= $request->email_addr;
-        $cliente->ctv_lgr_nacimiento= $request->ctv_lgr_nacimiento;
-        $cliente->postal= $request->postal;
-        $cliente->nied_id= $request->nied_id;
-        $cliente->cata_id= $request->cata_id;
-        $cliente->parr_id= $request->parr_id;
-        $cliente->address1= $request->address1;
-        $cliente->address2= $request->address2;
-        $cliente->address3= $request->address3;
-
-        $guardar=$cliente->save();
-        if($guardar)
-        {
-            $mensaje="sus datos se han cargado con exito";
-            return view('cliente/mensaje',compact('mensaje'));
-        }else{
-            $mensaje="sus datos no se han podido cargar por favor intente mas tarde";
-            return view('cliente/mensaje',compact('mensaje'));
-        }
-    }
+    
 
     public function BuscarDatos(Request $request)
     {
        
-        $request->validate(['national_id'=> 'required']);    
-        $buscar=Cliente::where('national_id',$request->national_id)->get();
+        $request->validate(['national_id'=> 'required']);
+        $national_id=$request->national_id;    
         
-        return view('cliente/MostrarDatos',compact('buscar'));
-       
+        $buscar=Cliente::where('national_id',$national_id)->first();
+        
+        if(!empty($buscar))
+        {
+            return url('https://www.google.com/search?client=opera&q=google&sourceid=opera&ie=UTF-8&oe=UTF-8'); /*$buscar;*///aqui se tiene que enviar al usuario sus datos mediante un post
+                                
+        }else{
+        return "no existe";/*aqui va la direccion que reenvia a crear el nuevo cliente si no existe 
+                             la cedula https://10.2.36.179/api/clientes/nuevo*/ 
+        
+        }
 
     }
 
     public function buscar()
     {
-        return view('cliente.buscar');
+        return view('cliente.buscar');//este metodo es solo de prueba borrar para produccion
     }
     
-    public function Formulario()
-    {
-        return view('cliente.Nuevo');
-    }
 }

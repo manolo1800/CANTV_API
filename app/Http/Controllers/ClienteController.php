@@ -12,12 +12,12 @@ class ClienteController extends Controller
     {
         $client = new Client([
             //url de base con la que se hace la peticion
-            'base_uri' => 'http://127.0.0.1:8000/api/',
+            'base_uri' => 'https://10.2.36.179/api/',
             //tiempo de espera para conectar a la api
             'timeout'  => 5.0,
         ]);
         $national_id=$request->national_id;    
-        $response = $client->request('GET', "users/?national_id=$national_id");
+        $response = $client->request('GET', "clientes/?national_id=$national_id");
     
         $user= ($response->getBody()->getContents());
         if(!empty($user) ||$user=="[]" || $user=="{}" || $user="[{}]"){
@@ -33,12 +33,12 @@ class ClienteController extends Controller
        
         $client = new Client([
             //url de base con la que se hace la peticion
-            'base_uri' => 'http://127.0.0.1:8000/api/',
+            'base_uri' => 'https://10.2.36.179/api/',
             //tiempo de espera para conectar a la api
             'timeout'  => 5.0,
         ]);
         $national_id=$request->national_id;    
-        $response = $client->request('GET', "users/?national_id=$national_id");
+        $response = $client->request('GET', "clientes/?national_id=$national_id");
     
         $user= ($response->getBody()->getContents());
         if($user=="[]" || $user=="{}"){
@@ -57,7 +57,7 @@ class ClienteController extends Controller
     {
         $client = new Client([
             //url de base con la que se hace la peticion
-            'base_uri' => 'http://127.0.0.1:8000/api/',
+            'base_uri' => 'https://10.2.36.179/api/',
             //tiempo de espera para conectar a la api
             'timeout'  => 5.0,
         ]);
@@ -82,7 +82,7 @@ class ClienteController extends Controller
         $address2= $request->address2;
         $address3= $request->address3;
         
-        $response = $client->request('POST', "users",[
+        $response = $client->request('POST', "clientes",[
         
         'form_params'=>[ 
         'national_id'=>$national_id,

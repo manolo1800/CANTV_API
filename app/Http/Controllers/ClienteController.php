@@ -20,7 +20,7 @@ class ClienteController extends Controller
         $response = $client->request('GET', "users/?national_id=$national_id");
     
         $user= ($response->getBody()->getContents());
-        if($user=="[]" || $user=="{}"){
+        if(!empty($user) ||$user=="[]" || $user=="{}" || $user="[{}]"){
             return view('cliente.nuevo');
         }else{    
         return view('cliente.mostrar',compact('user'));

@@ -72,7 +72,7 @@
     @enderror<br/><br/>
 
     <label for="ctv_birthdate">ctv birthdate:</label><br/>
-    <input type="text" name="ctv_birthdate" />
+    <input type="text" name="ctv_birthdate" placeholder="año-mes-dia" />
 
     @error('ctv_birthdate')
         <br/>

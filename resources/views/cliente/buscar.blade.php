@@ -1,4 +1,4 @@
-<form action="{{route('cliente.BuscarDatos')}}" method="POST">
+<form action="{{route('cliente.solicitud')}}" method="GET">
     
     @csrf
 

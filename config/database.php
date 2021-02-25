@@ -48,8 +48,8 @@ return [
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'CANTV'),//cambiar el nombre de CANTV por el nombre de la DB usada para produccion
-            'username' => env('DB_USERNAME', 'root'),//ingresar nombre del que tiene acceso en la DB
+            'database' => env('DB_DATABASE', 'forge'),//cambiar el nombre de CANTV por el nombre de la DB usada para produccion
+            'username' => env('DB_USERNAME', 'forge'),//ingresar nombre del que tiene acceso en la DB
             'password' => env('DB_PASSWORD', ''),//ingresar clave del usuario de la DB
             'unix_socket' => env('DB_SOCKET',''),
             'charset' => 'utf8mb4',

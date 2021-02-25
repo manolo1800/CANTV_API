@@ -1,38 +1,114 @@
 <?php
-/*todas las vistas estan en resources/views/clientes y la conexion esta configurada tanto en
-app/config/database.php como en el archibo .env 
-las rutas estan configuradas en el archivo web del fichero routes</div> */
+
 namespace App\Http\Controllers;
 
-
-use App\Models\Cliente;
-use Illuminate\support\Facades\Http;
-
+use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 class ClienteController extends Controller
 {
     
 
-    public function BuscarDatos()
+    public function index (Request $request)
+    {
+        $client = new Client([
+            //url de base con la que se hace la peticion
+            'base_uri' => 'http://127.0.0.1:8000/api/',
+            //tiempo de espera para conectar a la api
+            'timeout'  => 5.0,
+        ]);
+        $national_id=$request->national_id;    
+        $response = $client->request('GET', "users/?national_id=$national_id");
+    
+        $user= ($response->getBody()->getContents());
+        if($user=="[]" || $user=="{}"){
+            return view('cliente.nuevo');
+        }else{    
+        return view('cliente.mostrar',compact('user'));
+        } 
+            
+    }
+
+    public function show (Request $request)
     {
        
-        $cliente= HTTP::post('https://10.2.36.179/api/clientes');//recoge datos post de la api
-        $cliente->string();
-        $buscar=Cliente::where('national_id',$cliente)->first();
-        if(!empty($buscar))
-        {
-            return $buscar;//aqui se tiene que enviar al usuario sus datos mediante un post
-                                
-        }else{
-        return "no existe";/*aqui va la direccion que reenvia a crear el nuevo cliente si no existe 
-                             la cedula https://10.2.36.179/api/clientes/nuevo*/ 
-        
-        }
-
+        $client = new Client([
+            //url de base con la que se hace la peticion
+            'base_uri' => 'http://127.0.0.1:8000/api/',
+            //tiempo de espera para conectar a la api
+            'timeout'  => 5.0,
+        ]);
+        $national_id=$request->national_id;    
+        $response = $client->request('GET', "users/?national_id=$national_id");
+    
+        $user= ($response->getBody()->getContents());
+        if($user=="[]" || $user=="{}"){
+            return view('cliente.nuevo');
+        }else{    
+        return view('cliente.mostrar',compact('user'));
+        } 
     }
 
-    public function buscar()
+    public function formulario()
     {
-        return view('cliente.buscar');//este metodo es solo de prueba borrar para produccion
+        return view('cliente/buscar');
     }
+
+    public function crear(Request $request)
+    {
+        $client = new Client([
+            //url de base con la que se hace la peticion
+            'base_uri' => 'http://127.0.0.1:8000/api/',
+            //tiempo de espera para conectar a la api
+            'timeout'  => 5.0,
+        ]);
+          
+        $national_id = $request->national_id;
+        $first_name= $request->first_name;
+        $last_name= $request->last_name;
+        $mari_id= $request->mari_id;
+        $nac_id= $request->nac_id;
+        $sex_id= $request->sex_id;
+        $prof_id= $request->prof_id;
+        $ctv_birthdate= $request->ctv_birthdate;
+        $salutation_cd= $request->salutation_cd;
+        $phone= $request->phone;
+        $email_addr= $request->email_addr;
+        $ctv_lgr_nacimiento= $request->ctv_lgr_nacimiento;
+        $postal= $request->postal;
+        $nied_id= $request->nied_id;
+        $cata_id= $request->cata_id;
+        $parr_id= $request->parr_id;
+        $address1= $request->address1;
+        $address2= $request->address2;
+        $address3= $request->address3;
+        
+        $response = $client->request('POST', "users",[
+        
+        'form_params'=>[ 
+        'national_id'=>$national_id,
+        'first_name'=> $first_name,
+        'last_name'=> $last_name,
+        'mari_id'=> $mari_id,
+        'nac_id'=> $nac_id,
+        'sex_id'=> $sex_id,
+        'prof_id'=> $prof_id,
+        'ctv_birthdate'=>$ctv_birthdate,
+        'salutation_cd'=> $salutation_cd,
+        'phone'=> $phone,
+        'email_addr'=>$email_addr,
+        'ctv_lgr_nacimiento'=>$ctv_lgr_nacimiento,
+        'postal'=>$postal,
+        'nied_id'=>$nied_id,
+        'cata_id'=> $cata_id,
+        'parr_id'=> $parr_id,
+        'address1'=> $address1,
+        'address2'=> $address2,
+        'address3'=> $address3
+        ]
+        ]);        
+        return view('cliente/buscar');
+    }
+    
+   
     
 }
